@@ -1,5 +1,10 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby  #shebang explains that everthing is written in ruby
 
-require_relative '../lib/environment' 
+require_relative '../lib/environment'   #runs environment file so everthing can talk to each other without issue
 
-Cli.new.call
+
+#Api.programs
+#$prompt = TTY::Prompt.new
+
+
+Cli.new.start #calling class method responsible for starting the program
