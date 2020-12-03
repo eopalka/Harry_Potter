@@ -2,36 +2,43 @@
 
 class Api
     
-  def self.base_url
-    "http://hp-api.herokuapp.com/api/characters/house"
-  end
-
-  def self.load_data
-    load_characters
-  end
-
-
-  def self.load_characters
-    response = RestClient.get(base_url + '/gryffindor')
-    data = JSON.parse(response.body)
-    data["results"].each do |character_data|
-      Characters.new(character_data)
-    end
-    
-  end
-  
-end
-  
-  # URL = "http://hp-api.herokuapp.com/api/characters/house/gryffindor"
-  #   def get_programs
-  #     uri = URI.parse(URL)
-  #     response = Net::HTTP.get_response(uri)
-  #     response.body
-  #   end
+  # def self.base_url
+  #   "http://hp-api.herokuapp.com/api/characters/house"
   # end
+
+  # def self.load_data
+  #   load_characters
+  # end
+
+
+  # def self.load_characters
+  #   response = RestClient.get(base_url + '/gryffindor')
+  #   binding.pry
+  #   data = JSON.parse(response.body)
+  #   data["results"].each do |character_data|
+  #     Characters.new(character_data)
+  #   end
+    
+  # end
+
+    URL = "http://hp-api.herokuapp.com/api/characters/house"
+    def self.get_programs
+      uri = URI.parse(URL + '/gryffindor')
+      response = Net::HTTP.get_response(uri)
+      response.body
+    end
+
+    def json_parse(data)
+      JSON.parse(data)
+    end
+
   
   # programs = Api.new.get_programs
   # puts programs
+  
+end
+  
+
 
 
 

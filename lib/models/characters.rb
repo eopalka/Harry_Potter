@@ -5,8 +5,8 @@ class Characters
 
     @@all = []
 
-    def initialize(data)
-        self.name = data["name"]
+    def initialize(name, house, ansestry, patronus)
+        self.name = ["name"]
         self.house = data["house"]
         self.ansestry = data["ansestry"]
         self.patronus = data["patronus"]
