@@ -1,7 +1,6 @@
 class Cli 
 
     def start
-       # harry_logo
         puts "Welcome to Hogwarts School of Witchcraft and Wizardry!"
         sleep (1)
         puts "Time to be sorted into your house."
@@ -109,10 +108,5 @@ class Cli
         puts "Well I'm sure you will meet them all soon enough, now it's time for the feast to begin!"
         exit
     end
-
-
-# def harry_logo
-  
-# end
 
 end

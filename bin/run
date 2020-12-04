@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby  #shebang explains that everthing is written in ruby
+#!/usr/bin/env ruby  
 
 require_relative '../lib/environment'   #runs environment file so everthing can talk to each other without issue
 
