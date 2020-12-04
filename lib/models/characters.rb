@@ -1,20 +1,39 @@
 class Characters
 
 
-    attr_accessor :name, :house, :ansestry, :patronus
+    attr_accessor :name, :house, :ancestry, :patronus
 
     @@all = []
 
-    def initialize(name, house, ansestry, patronus)
-        self.name = ["name"]
-        self.house = data["house"]
-        self.ansestry = data["ansestry"]
-        self.patronus = data["patronus"]
+    def initialize(name, house, ancestry, patronus)
+        @name = name
+        @house = house
+        @ancestry = ancestry
+        @patronus = patronus
         @@all << self
     end
 
     def self.all
         @@all
+    end
+    
+    def self.random_house
+        house = self.all.sample
+        if house.house == ""
+           house = self.random_house
+        end
+        house
+    end
+
+    # def self.random_number
+    #     number = (0..(self.all.length - 1)).to_a
+    #     number.sample
+    # end
+
+    def self.by_house(house)
+        self.all.select do |character|
+            character.house == house
+        end
     end
 
     # def self.house_mates
