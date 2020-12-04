@@ -51,10 +51,10 @@ class Cli
     def character_details_menu
         input = get_input
 
-        if input.to_i.between?(1, Characters.all.length)
+        if input.to_i.between?(1, Characters.by_house(@chosen_house.house).length)
             #print character_details(input)
             index = input.to_i - 1
-            character = Characters.all[index]
+            character = Characters.by_house(@chosen_house.house)[index]
             print_character_details(character)
             meet_more_menu
        else
@@ -64,11 +64,21 @@ class Cli
     end
 
     def print_character_details(character)
+
         puts "I guess I should welcome you to #{character.house}."
         puts "I expect you'll work hard to help us earn the House Cup this year."
+
         puts "My name is #{character.name} by the way."
-        puts "Well if you must know I am #{character.ancestry}."
-        puts "I didn't think you'd ask but my patronus is #{character.patronus}."
+
+        if character.ancestry == ""
+            puts "I'm not actually sure of my full ancestry."
+        else puts "Well if you must know I am #{character.ancestry}."
+        end
+
+        if character.patronus == ""
+            puts "Why would you think a wizzard as strong as me needs a patronus? Pathetic."
+        else puts "I didn't think you'd ask but my patronus is a #{character.patronus}."
+        end
     end
 
 
@@ -83,13 +93,12 @@ class Cli
 
 
     def meet_more_menu
-        puts "Would you like to meet some more?"
+        puts "Would you like to meet some more? Type Yes or No"
         input = get_input
 
-        if input == "Yes" || "yes"
+        if input == "Yes" || input == "yes"
             list_characters
-        elsif
-            input == "No" || "no"
+        elsif input == "No" || input == "no"
             exit_time
         else
             invalid_choice
@@ -98,6 +107,7 @@ class Cli
 
     def exit_time
         puts "Well I'm sure you will meet them all soon enough, now it's time for the feast to begin!"
+        exit
     end
 
 

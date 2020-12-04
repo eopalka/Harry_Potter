@@ -2,9 +2,4 @@
 
 require_relative '../lib/environment'   #runs environment file so everthing can talk to each other without issue
 
-
-#Api.programs
-#$prompt = TTY::Prompt.new
-
-
 Cli.new.start #calling class method responsible for starting the program
