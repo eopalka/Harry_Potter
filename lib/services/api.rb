@@ -2,7 +2,7 @@ class Api
 
     URL = "http://hp-api.herokuapp.com/api/"
 
-    def self.get_programs
+    def self.get_programs #Takes api info and calls a parsing method, iterates over data to extract specific character attributes 
       uri = URI.parse(URL + "characters/")
       response = Net::HTTP.get_response(uri)
       data = json_parse(response.body)
@@ -11,7 +11,7 @@ class Api
       end
     end
 
-    def self.json_parse(data)
+    def self.json_parse(data) #parses from HTML into hashes so Ruby can understand it
       JSON.parse(data)
     end
 

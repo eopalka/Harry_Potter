@@ -8,8 +8,8 @@ class Cli
         sorting_hat_menu
     end
 
-    def sorting_hat_menu
-        @chosen_house = Characters.random_house
+    def sorting_hat_menu #assigns random house and sets it to instance vaiable to use again in rest of code
+        @chosen_house = Characters.random_house 
         puts "Sorting Hat: Hmmmm....quite tricky this one. It'll have to be...."
         sleep (4)
         puts "#{@chosen_house.house}!"
@@ -22,7 +22,7 @@ class Cli
     end
 
     def character_menu
-        input = get_input
+        input = get_input #local variable gets input and stores it for use in control flow
 
         if input == "Yes" || input == "yes"
             puts "Here they come now..."
@@ -34,10 +34,16 @@ class Cli
             main_menu
        end
     end
+
+    def alphabetical_names
+        Characters.by_house(@chosen_house.house).sort_by do |character|
+            character.name
+        end 
+    end
          
     def list_characters
-        Characters.by_house(@chosen_house.house).each.with_index(1) do |character, index|
-            puts "#{index}. #{character.name}"
+        alphabetical_names.each.with_index(1) do |character, index|
+            puts "#{index}. #{character.name}" # string interpolation
         end
         character_details_menu_options
     end
@@ -51,7 +57,6 @@ class Cli
         input = get_input
 
         if input.to_i.between?(1, Characters.by_house(@chosen_house.house).length)
-            #print character_details(input)
             index = input.to_i - 1
             character = Characters.by_house(@chosen_house.house)[index]
             print_character_details(character)
@@ -80,17 +85,6 @@ class Cli
         end
     end
 
-
-    def get_input
-        print "Enter Choice: "
-        gets.chomp
-    end 
-
-    def invalid_choice
-        puts "Not even magic could decipher what you meant by that, could you try again."
-    end
-
-
     def meet_more_menu
         puts "Would you like to meet some more? Type Yes or No"
         input = get_input
@@ -101,7 +95,17 @@ class Cli
             exit_time
         else
             invalid_choice
+            meet_more_menu
         end
+    end
+    
+    def get_input
+        print "Enter Choice: "
+        gets.chomp
+    end 
+
+    def invalid_choice
+        puts "Not even magic could decipher what you meant by that, could you try again."
     end
 
     def exit_time
@@ -110,3 +114,6 @@ class Cli
     end
 
 end
+
+
+# code challenge: print list of characters, in alphabetical order by name attribbute 

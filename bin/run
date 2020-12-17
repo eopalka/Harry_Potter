@@ -1,5 +1,5 @@
-#!/usr/bin/env ruby  
+#!/usr/bin/env ruby 
 
 require_relative '../lib/environment'   #runs environment file so everthing can talk to each other without issue
 
-Cli.new.start #calling class method responsible for starting the program
+Cli.new.start #instantiating a new instance on the Cli class then the method responsible for starting the program
