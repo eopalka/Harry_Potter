@@ -10,9 +10,9 @@ class Cli
     end
 
     def sorting_hat_menu #assigns random house and sets it to variable to use again in rest of code
-        @chosen_house = Characters.random_house 
+        @chosen_house = Character.random_house 
         puts "Sorting Hat: Hmmmm....quite tricky this one. It'll have to be...."
-        sleep (4)
+        sleep (4)s
         puts
         puts "#{@chosen_house.house}!"
         puts 
@@ -39,7 +39,7 @@ class Cli
     end
          
     def list_characters
-        Characters.by_house(@chosen_house.house).each.with_index(1) do |character, index|
+        Character.by_house(@chosen_house.house).each.with_index(1) do |character, index|
             puts "#{index}. #{character.name}"
         end
         character_details_menu_options
@@ -52,13 +52,13 @@ class Cli
 
     def character_details_menu
         input = get_input
-        character = Characters.find_by_name(input)
+        character = Character.find_by_name(input)
         if character != nil
             print_character_details(character)
             meet_more_menu
-        elsif input.to_i.between?(1, Characters.by_house(@chosen_house.house).length) 
+        elsif input.to_i.between?(1, Character.by_house(@chosen_house.house).length) 
             index = input.to_i - 1
-            character = Characters.by_house(@chosen_house.house)[index]
+            character = Character.by_house(@chosen_house.house)[index]
             print_character_details(character)
             meet_more_menu
        else

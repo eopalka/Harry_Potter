@@ -1,10 +1,9 @@
-class Characters
+class Character
 
     attr_accessor :name, :house, :ancestry, :patronus
 
     @@all = [] 
 
-    # .new will automatically run this method 
     def initialize(name, house, ancestry, patronus)
         @name = name
         @house = house

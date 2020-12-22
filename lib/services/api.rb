@@ -7,7 +7,7 @@ class Api
       response = Net::HTTP.get_response(uri)
       data = json_parse(response.body)
       data.each do |character_data|
-        Characters.new(character_data["name"], character_data["house"], character_data["ancestry"], character_data["patronus"])
+        Character.new(character_data["name"], character_data["house"], character_data["ancestry"], character_data["patronus"])
       end
     end
 

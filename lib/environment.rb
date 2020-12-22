@@ -7,5 +7,5 @@ require 'open-uri'
 
 require_relative "./services/cli"
 require_relative "./services/api"
-require_relative "./models/characters"
+require_relative "./models/character"
 
