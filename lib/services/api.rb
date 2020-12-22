@@ -15,6 +15,4 @@ class Api
       JSON.parse(data)
     end
 
-
-
 end

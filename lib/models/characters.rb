@@ -2,22 +2,27 @@ class Characters
 
     attr_accessor :name, :house, :ancestry, :patronus
 
-    @@all = [] #stores all my characters instances
+    @@all = [] 
 
-    # .new will automatically this method 
+    # .new will automatically run this method 
     def initialize(name, house, ancestry, patronus)
         @name = name
         @house = house
         @ancestry = ancestry
         @patronus = patronus
-        @@all << self # the instance you just created 
+        @@all << self
     end
 
     def self.all 
         @@all
     end
+
+    def self.find_by_name(name)
+        @@all.find {|person| person.name == name}
+
+    end
     
-    def self.random_house #uses .sample, array class method that randomizes the return
+    def self.random_house 
         house = self.all.sample
         if house.house == ""
            house = self.random_house

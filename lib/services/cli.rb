@@ -3,16 +3,19 @@ class Cli
     def start
         puts "Welcome to Hogwarts School of Witchcraft and Wizardry!"
         sleep (1)
+        puts
         puts "Time to be sorted into your house."
         Api.get_programs #all info loaded and models created at this point
         sorting_hat_menu
     end
 
-    def sorting_hat_menu #assigns random house and sets it to instance vaiable to use again in rest of code
+    def sorting_hat_menu #assigns random house and sets it to variable to use again in rest of code
         @chosen_house = Characters.random_house 
         puts "Sorting Hat: Hmmmm....quite tricky this one. It'll have to be...."
         sleep (4)
+        puts
         puts "#{@chosen_house.house}!"
+        puts 
         main_menu
     end
 
@@ -22,7 +25,7 @@ class Cli
     end
 
     def character_menu
-        input = get_input #local variable gets input and stores it for use in control flow
+        input = get_input
 
         if input == "Yes" || input == "yes"
             puts "Here they come now..."
@@ -34,29 +37,26 @@ class Cli
             main_menu
        end
     end
-
-    def alphabetical_names
-        Characters.by_house(@chosen_house.house).sort_by do |character|
-            character.name
-        end 
-    end
          
     def list_characters
-        alphabetical_names.each.with_index(1) do |character, index|
-            puts "#{index}. #{character.name}" # string interpolation
+        Characters.by_house(@chosen_house.house).each.with_index(1) do |character, index|
+            puts "#{index}. #{character.name}"
         end
         character_details_menu_options
     end
 
     def character_details_menu_options
-        puts "Select house mate's number"
+        puts "Select house mate's number or name"
         character_details_menu
     end
 
     def character_details_menu
         input = get_input
-
-        if input.to_i.between?(1, Characters.by_house(@chosen_house.house).length)
+        character = Characters.find_by_name(input)
+        if character != nil
+            print_character_details(character)
+            meet_more_menu
+        elsif input.to_i.between?(1, Characters.by_house(@chosen_house.house).length) 
             index = input.to_i - 1
             character = Characters.by_house(@chosen_house.house)[index]
             print_character_details(character)
@@ -117,3 +117,9 @@ end
 
 
 # code challenge: print list of characters, in alphabetical order by name attribbute 
+
+    # def alphabetical_names
+    #     Characters.by_house(@chosen_house.house).sort_by do |character|
+    #         character.name
+    #     end 
+    # end
